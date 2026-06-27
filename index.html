@@ -122,9 +122,13 @@
   footer a { color: rgba(255,255,255,0.5); text-decoration: none; cursor: pointer; }
   footer a:hover { color: rgba(255,255,255,0.8); }
 
+  .nav-mobile-right { display: none; align-items: center; gap: 8px; }
+  .nav-cta-mobile { background: var(--navy); color: var(--white); border: none; cursor: pointer; padding: 7px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; font-family: 'Inter', sans-serif; white-space: nowrap; }
+
   @media (max-width: 640px) {
     .nav-links { display: none; }
     .nav-toggle { display: block; }
+    .nav-mobile-right { display: flex; }
     .hero { min-height: calc(100svh - 56px); padding: 40px 20px; }
     .stats-row { grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .stat-num { font-size: 26px; }
@@ -184,17 +188,20 @@
     <a onclick="show('resources')">Resources</a>
     <a onclick="openCalendly()" class="nav-cta">Book a free call</a>
   </div>
-  <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-mobile-right">
+    <button class="nav-cta-mobile" onclick="openCalendly()">Book a free call</button>
+    <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a onclick="show('home');toggleMenu()">Home</a>
-  <a onclick="show('about');toggleMenu()">About</a>
-  <a onclick="show('services');toggleMenu()">Services</a>
-  <a onclick="show('resources');toggleMenu()">Resources</a>
-  <a onclick="openCalendly();toggleMenu()">Book a free call</a>
+  <a onclick="show('home');closeMenu()">Home</a>
+  <a onclick="show('about');closeMenu()">About</a>
+  <a onclick="show('services');closeMenu()">Services</a>
+  <a onclick="show('resources');closeMenu()">Resources</a>
+  <a onclick="closeMenu();openCalendly()">Book a free call</a>
 </div>
 
 <!-- HOME -->
@@ -489,8 +496,12 @@
     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.getElementById('mobileMenu').classList.remove('open');
+    closeMenu();
     return false;
+  }
+
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
   }
 
   function toggleMenu() {
