@@ -98,6 +98,15 @@ hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
 .cta-box { background: var(--navy); border-radius: var(--radius); padding: 36px 28px; text-align: center; margin-top: 48px; }
 .cta-box h3 { font-family: 'Lora', serif; font-size: 22px; color: var(--white); margin-bottom: 8px; font-weight: 400; }
 .cta-box p { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 22px; }
+
+.intake-box { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; margin-top: 36px; }
+.intake-box h3 { font-family: 'Lora', serif; font-size: 19px; color: var(--text); margin-bottom: 6px; font-weight: 400; }
+.intake-row { margin-bottom: 14px; display: flex; flex-direction: column; gap: 6px; }
+.intake-row label { font-size: 13px; color: var(--text); font-weight: 500; }
+.intake-row .req { color: var(--gold); margin-left: 2px; }
+.intake-row input, .intake-row select, .intake-row textarea { font-family: 'Inter', sans-serif; font-size: 14px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--cream); color: var(--text); resize: vertical; }
+.intake-row input:focus, .intake-row select:focus, .intake-row textarea:focus { outline: none; border-color: var(--gold); }
+.intake-error { color: #A33; font-size: 13px; margin-bottom: 12px; }
 .btn-cta { display: inline-block; background: var(--white); color: var(--navy); padding: 13px 28px; border-radius: var(--radius); font-size: 14px; font-weight: 600; border: none; cursor: pointer; transition: opacity 0.15s; text-decoration: none; }
 .btn-cta:hover { opacity: 0.9; }
 
@@ -349,9 +358,48 @@ footer a:hover { color: rgba(255,255,255,0.8); }
 
 <p style="font-size:13px;color:var(--muted);margin-top:20px;padding:14px 16px;background:var(--cream);border-radius:var(--radius);border:1px solid var(--border)">This service is not legal, financial, or mental health advice. I help you prepare and make better decisions when dealing with the professionals on your team.</p>
 
+<div class="intake-box" id="intakeBox">
+<h3>Tell me a bit about your situation</h3>
+<p style="font-size:13px;color:var(--muted);margin-bottom:16px">Two minutes now saves time on the call. Nothing here is stored anywhere except your own email draft — this just prepares a message to me.</p>
+<form id="intakeForm" onsubmit="return submitIntake(event)" novalidate>
+  <div class="intake-row">
+    <label for="intakeName">Name<span class="req">*</span></label>
+    <input type="text" id="intakeName" required>
+  </div>
+  <div class="intake-row">
+    <label for="intakeEmail">Email<span class="req">*</span></label>
+    <input type="email" id="intakeEmail" required>
+  </div>
+  <div class="intake-row">
+    <label for="intakeFocus">What's this mainly about?</label>
+    <select id="intakeFocus">
+      <option value="Children / custody">Children / custody</option>
+      <option value="Assets / finances">Assets / finances</option>
+      <option value="Support (child/spousal)">Support (child/spousal)</option>
+      <option value="A mix of the above">A mix of the above</option>
+      <option value="Not sure yet">Not sure yet</option>
+    </select>
+  </div>
+  <div class="intake-row">
+    <label for="intakeUrgency">How urgent does this feel?</label>
+    <select id="intakeUrgency">
+      <option value="Just exploring / early days">Just exploring / early days</option>
+      <option value="Somewhat urgent">Somewhat urgent</option>
+      <option value="Urgent — something's happening now">Urgent — something's happening now</option>
+    </select>
+  </div>
+  <div class="intake-row">
+    <label for="intakeNotes">Anything you want me to know before we talk?</label>
+    <textarea id="intakeNotes" rows="3"></textarea>
+  </div>
+  <p id="intakeError" class="intake-error" style="display:none">Please fill in your name and a valid email.</p>
+  <button type="submit" class="btn-cta">Send this to me →</button>
+</form>
+</div>
+
 <div class="cta-box">
-<h3>Not sure what you need?</h3>
-<p>Start with the free call. That's what it's for.</p>
+<h3>Prefer to just pick a time?</h3>
+<p>Skip the form — the free call covers the same ground either way.</p>
 <button class="btn-cta" onclick="openCalendly()">Choose a time →</button>
 </div>
 </div>
@@ -468,6 +516,38 @@ Not legal advice. Not therapy. Not mediation.<br>
 
 <script>
 const CALENDLY_URL = 'https://calendly.com/joshguharoy123/30min';
+const INTAKE_EMAIL = 'cadivorcenavigator@gmail.com';
+
+function submitIntake(event) {
+  event.preventDefault();
+  const name = document.getElementById('intakeName').value.trim();
+  const email = document.getElementById('intakeEmail').value.trim();
+  const focus = document.getElementById('intakeFocus').value;
+  const urgency = document.getElementById('intakeUrgency').value;
+  const notes = document.getElementById('intakeNotes').value.trim();
+  const errorEl = document.getElementById('intakeError');
+
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!name || !emailOk) {
+    errorEl.style.display = 'block';
+    return false;
+  }
+  errorEl.style.display = 'none';
+
+  const subject = encodeURIComponent('New intake: ' + name + ' — ' + focus);
+  const bodyLines = [
+    'Name: ' + name,
+    'Email: ' + email,
+    'Focus: ' + focus,
+    'Urgency: ' + urgency,
+    '',
+    'Notes:',
+    notes || '(none)'
+  ];
+  const body = encodeURIComponent(bodyLines.join('\n'));
+  window.location.href = 'mailto:' + INTAKE_EMAIL + '?subject=' + subject + '&body=' + body;
+  return false;
+}
 
 function openCalendly() {
 // Reset checkbox and button each time
