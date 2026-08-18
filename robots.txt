@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cadivorcenavigator.github.io/california-divorce-navigator/sitemap.xml
