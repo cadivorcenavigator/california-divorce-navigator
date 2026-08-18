@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>California Divorce Navigator — Coaching for Parents</title>
+<title>California Divorce Navigator — Coaching and Free Tools for Parents</title>
+<meta name="description" content="Practical California divorce coaching and free tools for custody, high-conflict co-parenting communication, organization, attorney preparation, assets, and support.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -95,6 +96,30 @@ hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
 .resource p { font-size: 13px; color: var(--muted); line-height: 1.55; }
 .resource-group-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 500; margin: 28px 0 4px; }
 
+.tool-teaser { background: var(--navy); padding: 56px 24px; }
+.tool-teaser-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1.35fr 0.65fr; gap: 36px; align-items: center; }
+.tool-teaser .section-eyebrow { color: var(--gold-light); }
+.tool-teaser h2 { font-family: 'Lora', serif; color: var(--white); font-size: clamp(23px, 4vw, 31px); font-weight: 400; line-height: 1.3; margin-bottom: 12px; }
+.tool-teaser p { color: rgba(255,255,255,0.68); font-size: 14px; line-height: 1.7; }
+.tool-teaser-action { text-align: right; }
+.tool-teaser-action .btn-cta { text-align: center; }
+
+.tool-intro { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin: 26px 0; }
+.tool-intro h3 { font-family: 'Lora', serif; font-size: 20px; font-weight: 400; color: var(--text); margin-bottom: 8px; }
+.tool-intro p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+.tool-fit { list-style: none; margin: 18px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 18px; }
+.tool-fit li { font-size: 13px; color: var(--text); padding: 8px 0 8px 22px; position: relative; border-bottom: 1px solid var(--border); }
+.tool-fit li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 600; }
+.tool-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0 28px; }
+.tool-step { background: var(--cream-dark); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
+.tool-step-num { font-size: 11px; color: var(--gold); font-weight: 600; letter-spacing: 0.08em; margin-bottom: 8px; }
+.tool-step h4 { font-size: 14px; color: var(--text); margin-bottom: 4px; }
+.tool-step p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+.tool-download { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.tool-download .hero-btn { padding: 13px 20px; font-size: 14px; }
+.btn-outline { display: inline-block; color: var(--navy); border: 1px solid var(--navy); padding: 12px 19px; border-radius: var(--radius); font-size: 14px; font-weight: 500; text-decoration: none; }
+.tool-note { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
 .cta-box { background: var(--navy); border-radius: var(--radius); padding: 36px 28px; text-align: center; margin-top: 48px; }
 .cta-box h3 { font-family: 'Lora', serif; font-size: 22px; color: var(--white); margin-bottom: 8px; font-weight: 400; }
 .cta-box p { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 22px; }
@@ -146,6 +171,10 @@ footer a:hover { color: rgba(255,255,255,0.8); }
 .cta-box { padding: 28px 20px; }
 .btn-cta { display: block; width: 100%; }
 .calendly-modal { height: 92vh; }
+.tool-teaser-inner { grid-template-columns: 1fr; gap: 22px; }
+.tool-teaser-action { text-align: left; }
+.tool-teaser-action .btn-cta { display: inline-block; width: auto; }
+.tool-fit, .tool-steps { grid-template-columns: 1fr; }
 }
 
 /* CALENDLY LOADER */
@@ -203,6 +232,7 @@ footer a:hover { color: rgba(255,255,255,0.8); }
 <div class="nav-links">
 <a onclick="show('about')">About</a>
 <a onclick="show('services')">Services</a>
+<a onclick="show('tools')">Free Tools</a>
 <a onclick="show('resources')">Resources</a>
 <a onclick="openCalendly()" class="nav-cta">Book a free call</a>
 </div>
@@ -218,6 +248,7 @@ footer a:hover { color: rgba(255,255,255,0.8); }
 <a onclick="show('home');closeMenu()">Home</a>
 <a onclick="show('about');closeMenu()">About</a>
 <a onclick="show('services');closeMenu()">Services</a>
+<a onclick="show('tools');closeMenu()">Free Tools</a>
 <a onclick="show('resources');closeMenu()">Resources</a>
 <a onclick="closeMenu();openCalendly()">Book a free call</a>
 </div>
@@ -271,6 +302,17 @@ footer a:hover { color: rgba(255,255,255,0.8); }
 </div>
 </div>
 
+<div class="tool-teaser">
+<div class="tool-teaser-inner">
+<div>
+<div class="section-eyebrow">Free practical tool</div>
+<h2>When every co-parenting message feels like a miniature hearing.</h2>
+<p>Use the free communication toolkit to find the real request, separate deadlines from decision authority, and draft a shorter response that closes the loop.</p>
+</div>
+<div class="tool-teaser-action"><button class="btn-cta" onclick="show('tools')">Open the free toolkit →</button></div>
+</div>
+</div>
+
 <div class="testimonials">
 <div class="testimonials-inner">
 <div class="section-eyebrow">What people say</div>
@@ -300,6 +342,46 @@ footer a:hover { color: rgba(255,255,255,0.8); }
 <p class="body-p" style="margin-bottom:24px">If I can help you, I'll tell you how. If I can't, I'll point you toward someone who can.</p>
 <button class="hero-btn" onclick="openCalendly()">Choose a time →</button>
 <p class="hero-note" style="margin-top:12px">Booking is instant — pick a time that works for you</p>
+</div>
+</div>
+</section>
+
+<!-- FREE TOOLS -->
+<section id="tools">
+<div class="page-content">
+<div class="label">Free tools</div>
+<div class="section-title">Start with the message in front of you.</div>
+<p class="body-p">This free toolkit is for parents dealing with difficult co-parenting messages, response deadlines, repeated conflict, or uncertainty about what a custody order actually requires. It helps you organize the problem before you reply or spend professional time on it.</p>
+
+<div class="tool-intro">
+<h3>The Co-Parenting Communication Toolkit</h3>
+<p>Built from years of high-conflict co-parenting experience and a structured review of real communication patterns. It is practical organization and communication support—not legal advice.</p>
+<ul class="tool-fit">
+<li>Every message feels like a miniature hearing</li>
+<li>You are unsure whether a deadline is real</li>
+<li>You over-explain and invite another argument</li>
+<li>You avoid legitimate requests because of the conflict cost</li>
+</ul>
+</div>
+
+<div class="resource-group-label">The four-step quick method</div>
+<div class="tool-steps">
+<div class="tool-step"><div class="tool-step-num">STEP 01</div><h4>Find the smallest decision</h4><p>What exactly are you being asked to agree to, decline, provide, or do—and by when?</p></div>
+<div class="tool-step"><div class="tool-step-num">STEP 02</div><h4>Separate procedure from authority</h4><p>A duty to respond is not necessarily a duty to agree. Check the controlling provision and its exceptions.</p></div>
+<div class="tool-step"><div class="tool-step-num">STEP 03</div><h4>Decompose the message</h4><p>Sort each part into Answer, Verify, Ignore, or Separate so pressure does not dictate your reasoning.</p></div>
+<div class="tool-step"><div class="tool-step-num">STEP 04</div><h4>Choose a closed disposition</h4><p>Agree, do not agree, need information, will comply, or not applicable—then add only the necessary next step.</p></div>
+</div>
+
+<div class="tool-download">
+<a class="hero-btn" href="downloads/co-parenting-communication-worksheets.zip" download>Download the 5 worksheets</a>
+<a class="btn-outline" href="downloads/closed-loop-client-playbook.md" download>Download the client playbook</a>
+</div>
+<p class="tool-note">Includes an Order Map, Thread Decomposition worksheet, Observable Pattern Register, Closed Response Builder, and Escalation Brief. Do not put sensitive records or children’s identifying information into a worksheet you plan to share.</p>
+
+<div class="cta-box">
+<h3>The tools help you see the pattern. A conversation helps you apply it.</h3>
+<p>Bring the part that feels most confusing or urgent. We can identify the immediate pressure point, the larger picture around it, and the right next step.</p>
+<button class="btn-cta" onclick="openCalendly()">Book a free 30-minute call →</button>
 </div>
 </div>
 </section>
@@ -506,6 +588,7 @@ footer a:hover { color: rgba(255,255,255,0.8); }
 
 <footer>
 <strong>California Divorce Navigator</strong> · California<br>
+<a onclick="show('tools')">Free Tools</a> &nbsp;·&nbsp;
 <a onclick="show('terms')">Terms & Conditions</a> &nbsp;·&nbsp;
 <a onclick="show('privacy')">Privacy Policy</a> &nbsp;·&nbsp;
 <a href="mailto:cadivorcenavigator@gmail.com">cadivorcenavigator@gmail.com</a><br>
@@ -592,6 +675,7 @@ if (e.target === document.getElementById('calendlyOverlay')) closeCalendlyBtn();
 function show(id) {
 document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
 document.getElementById(id).classList.add('active');
+if (window.location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
 window.scrollTo({ top: 0, behavior: 'smooth' });
 closeMenu();
 return false;
@@ -604,6 +688,11 @@ document.getElementById('mobileMenu').classList.remove('open');
 function toggleMenu() {
 document.getElementById('mobileMenu').classList.toggle('open');
 }
+
+window.addEventListener('DOMContentLoaded', function() {
+const requested = window.location.hash.replace('#', '');
+if (requested && document.getElementById(requested)) show(requested);
+});
 </script>
 </body>
 </html>
